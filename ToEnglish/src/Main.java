@@ -3,21 +3,24 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        toEnglish h = new toEnglish(99);
-//        String bigDecimal = null;
-//        System.out.println("输入数字：");
-//        Scanner scan = new Scanner(System.in);
-//        if(scan.hasNext()){
-//            bigDecimal = scan.next();
-//        }
-//        BigDecimal a = new BigDecimal(bigDecimal);
-//
-//        toEnglish t = new toEnglish(a);
-        BigDecimal bd = new BigDecimal("91515010781.15200015");
+        while(true) {
+            String bigDecimal = null;
+            System.out.println("Please enter a dollar amount:");
+            Scanner scan = new Scanner(System.in);
+            if (scan.hasNext()) {
+                bigDecimal = scan.next();
+            }
+            BigDecimal a = new BigDecimal(bigDecimal);
 
-        toEnglish t = new toEnglish(bd);
-        String a = t.bigNumber2English();
-        System.out.println(a);
+            toEnglish t = new toEnglish(a);
+            String answer = t.bigNumber2English();
+            System.out.println("Dollar amount in words:"+answer);
+            System.out.println();
+        }
+//        BigDecimal bd = new BigDecimal("649846513123.152016155605");
+//        toEnglish t = new toEnglish(bd);
+//        String a = t.bigNumber2English();
+//        System.out.println(a);
 
     }
 }
