@@ -5,47 +5,44 @@ public class toChinese {
     private double number;
     private BigDecimal bigDecimal;
     private String[] digits = {"零","壹","贰","叁","肆","伍","陆","柒","捌","玖","拾"};
-    private String[] tenToTwenty = {"eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"};
-    private String[] tens = {"","Ten","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
-    private String[] numericalUnit = {"拾","佰","仟","萬","亿","quadrillion","quintillion "};
+    private String[] numericalUnit = {"拾","佰","仟","萬","亿","兆","京"};
+    private BigDecimal decimal10000 = new BigDecimal("10000");
+    private BigDecimal decimal1 = new BigDecimal("1");
     toChinese(BigDecimal bg){
         this.bigDecimal = bg;
-        //judge();
     }
 
     //核心逻辑
     public String bigNumber2Chinese(){
-        long longBigDecimal = this.bigDecimal.longValue();
-        //System.out.println(longBigDecimal);
         ArrayList<String> al = new ArrayList<String>();
         int numericalIndex = 0;
         String res = "";
-        if(longBigDecimal<1000){
-            return judge((int)longBigDecimal) + "\tand\t" + getDecimal();
+
+        //小于一万的情况单独考虑
+        if(this.bigDecimal.compareTo(this.decimal10000)==-1){
+            return judge(this.bigDecimal.intValue()) + getDecimal();
         }
-        while(longBigDecimal/1000>0){
-            long num = longBigDecimal % 1000;
-            String string = judge((int)num);
+
+        while(this.bigDecimal.divide(this.decimal10000).compareTo(this.decimal1)==1 ||this.bigDecimal.divide(this.decimal10000).compareTo(this.decimal1)==0){
+            BigDecimal num = this.bigDecimal.remainder(this.decimal10000);
+            //num一定是一个10000以内的数，所以精度不会丢失
+            String string = judge(num.intValue());
             if(numericalIndex==0) {
-                if(string.equals("ZERO")){
-                    al.add("");
-                }
-                else {
-                    al.add(string + " " + this.numericalUnit[numericalIndex] + "and");
-                }
+                al.add(string);
+                numericalIndex = 2;
             }
-            else{
-                if(string.equals("ZERO")){
+            else {
+                if(num.intValue()==0){
                     al.add("");
-                }
-                else {
-                    al.add(string + " " + this.numericalUnit[numericalIndex] + ",");
+
+                }else {
+                    al.add(string + this.numericalUnit[numericalIndex] + " ");
                 }
             }
             numericalIndex++;
-            longBigDecimal = (longBigDecimal-num)/1000;
-            if(longBigDecimal<1000){
-                al.add(judge((int)longBigDecimal)+" "+this.numericalUnit[numericalIndex+1]+",");
+            this.bigDecimal = this.bigDecimal.subtract(num).divide(this.decimal10000);
+            if(this.bigDecimal.compareTo(this.decimal10000)==-1){
+                al.add(judge(bigDecimal.intValue())+this.numericalUnit[numericalIndex]+" ");
             }
         }
 
@@ -54,46 +51,71 @@ public class toChinese {
         }
         return res +" "+ getDecimal();
     }
-    //把大数分解成一到多个小于1000的数据，可以重复利用judge方法
+
+    //把大数分解为0~10000的数 可以重复使用
     public String judge(int num){
+        if(num==0){
+            return "";
+        }
         if(num<=10){
-            return getDigits(num).toUpperCase();
+            return getDigits(num);
         }
         if(10<num && num<100){
-            return getTen(num).toUpperCase();
+            return getTen(num);
         }
         if(100<=num && num<1000){
-            int ten = num % 100;
-            int hundred = (num - ten)/100;
+            return getHundred(num);
+        }
+        return getThousand(num);
+    }
 
-            return getDigits(hundred).toUpperCase() +" Hundred " +getTen(ten).toUpperCase();
+    //得到个位数
+    private String getDigits(int num){
+        return this.digits[num];
+    }
+
+    //10-20要单独考虑
+    private String getTen(int num){
+        if(num == 0){//比如200 只返回2hundred
+            return "";
+        }
+        if(10< num && num<100){
+            int digit = num % 10;
+            int ten = (num-digit)/10;
+            if(digit==0){
+                return this.digits[ten] + this.numericalUnit[0];
+            }
+            else{
+                return this.digits[ten] + this.numericalUnit[0] + this.digits[digit];
+            }
         }
         return "";
     }
 
-    private String getDigits(int num){
-        return this.digits[num];
+    //中间是0怎么办！
+    private String getHundred(int num){
+        int digit = num % 100;
+        int hund = (num - digit)/100;
+        if(digit == 0){
+            return this.digits[hund] + this.numericalUnit[1];
+        }
+        if(0<digit && digit<10){//叁佰一十
+            return this.digits[hund] + this.numericalUnit[1] + "零" + this.digits[digit];
+        }
+        return this.digits[hund] + this.numericalUnit[1] + getTen(digit);
     }
-    private String getTen(int num){
-        //要加上个位数
-        //末尾为0就不要输出zero了！
-        if(num == 0){//比如200 只返回2hundred
-            return "";
-        }
-        if(0<num && num<10){
-            return this.digits[num];
-        }
-        //上下都不包括10
-        if(10<num && num<20){
-            return this.tenToTwenty[num-11];
-        }
-        int a = num;
-        int digit = a % 10;
-        int ten = (a - digit)/10;
+
+    private String getThousand(int num){
+        int digit = num%1000;
+        int thou = (num-digit)/1000;
         if(digit==0){
-            return this.tens[ten];
+            return this.digits[thou] + this.numericalUnit[2];
         }
-        return  tens[ten] + "-" + getDigits(digit);
+        if(0<digit&&digit<100){
+            return this.digits[thou] + this.numericalUnit[2]+"零" + getTen(digit);
+        }
+        //三千一
+        return this.digits[thou] + this.numericalUnit[2] + getHundred(digit);
     }
 
     private String getDecimal(){
@@ -105,10 +127,9 @@ public class toChinese {
         long fnum = this.bigDecimal.multiply(bg).longValue() % pow;
         return fnum + "/" + pow;
     }
-
-
 }
 
 /**
+ * 维基百科：https://zh.wikipedia.org/wiki/%E5%85%86
  * pow用法：https://www.runoob.com/java/number-pow.html
  */

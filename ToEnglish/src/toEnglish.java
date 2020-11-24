@@ -126,7 +126,6 @@ public class toEnglish {
         return fn.longValue() + "/" + pow;
     }
 
-
 }
 
 /**
