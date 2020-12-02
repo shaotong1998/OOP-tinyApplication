@@ -1,8 +1,12 @@
 import java.math.BigDecimal;
+import java.sql.SQLOutput;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) {
+        //以下是英文版
         while(true) {
             String bigDecimal = null;
             System.out.println("Please enter a dollar amount:");
@@ -14,13 +18,25 @@ public class Main {
 
             toEnglish t = new toEnglish(a);
             String answer = t.bigNumber2English();
+
+            toChinese t2 = new toChinese(a);
+            String answer2 = t2.bigNumber2Chinese();
+
             System.out.println("Dollar amount in words:"+answer);
             System.out.println();
+            System.out.println("中文表示为:"+answer2);
+            System.out.println();
+            System.out.println();
         }
-//        BigDecimal bd = new BigDecimal("649846513123.152016155605");
+
+
+//        BigDecimal bd = new BigDecimal("1000000001.2054245251");
 //        toEnglish t = new toEnglish(bd);
 //        String a = t.bigNumber2English();
 //        System.out.println(a);
+
+
+
 
     }
 }

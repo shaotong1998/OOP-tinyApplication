@@ -1,21 +1,22 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class toEnglish {
-    private double number;
+    private String number;
     private BigDecimal bigDecimal;
-    private BigDecimal bigDecimal2;
+    //private BigDecimal bigDecimal2;
     private String[] digits = {"zero","one","two","three","four","five","six","seven","eight","nine","ten"};
     private String[] tenToTwenty = {"eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"};
     private String[] tens = {"","Ten","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
-    private String[] numericalUnit = {"","Thousand","Million","Billion","Trillion","quadrillion","quintillion","sextillion","septillion","octillion","nonillion","decillion"};
+    private String[] numericalUnit = {"","Thousand","Million","Billion","Trillion","Quadrillion","Quintillion","Sextillion","Septillion","Octillion","Nonillion","Decillion"};
     private BigDecimal decimal1000 = new BigDecimal("1000");
-    private BigDecimal decimal0 = new BigDecimal("1");
+    private BigDecimal decimal1 = new BigDecimal("1");
 
     toEnglish(BigDecimal bg){
         this.bigDecimal = bg;
-        this.bigDecimal2 = bg;
+        this.number = bg.toPlainString();
         //judge();
     }
     //核心逻辑
@@ -28,12 +29,12 @@ public class toEnglish {
 
         //-1是小于 1是大于
         if(this.bigDecimal.compareTo(this.decimal1000)==-1){
-            return judge(this.bigDecimal.intValue()) + "\tand\t" + getDecimal();
+            return judge(this.bigDecimal.intValue()) + "\t" + getDecimal();
         }
         //while(longBigDecimal/1000>0){
         //this.bigDecimal.divide(this.decimal1000).longValue()>0
         //QQQ:6/1000compare0 = 1?
-        while(this.bigDecimal.divide(this.decimal1000).compareTo(this.decimal0)==1){
+        while(this.bigDecimal.divide(this.decimal1000).compareTo(this.decimal1)==1||this.bigDecimal.divide(this.decimal1000).compareTo(this.decimal1)==0){
 //            System.out.println(this.bigDecimal.divide(this.decimal1000).compareTo(this.decimal0));
 //            BigDecimal t = new BigDecimal("0.6");
 //            System.out.println(t.compareTo(this.decimal0));
@@ -46,7 +47,7 @@ public class toEnglish {
                     al.add("");
                 }
                 else {
-                    al.add(string + " " + this.numericalUnit[numericalIndex] + "and");
+                    al.add(string + " " + this.numericalUnit[numericalIndex]);
                 }
             }
             else{
@@ -60,6 +61,8 @@ public class toEnglish {
             numericalIndex++;
             //longBigDecimal = (longBigDecimal-num)/1000;
             this.bigDecimal = this.bigDecimal.subtract(num).divide(this.decimal1000);
+
+            //System.out.println(this.bigDecimal.longValue());
 
             if(this.bigDecimal.compareTo(this.decimal1000)==-1){
                 al.add(judge(bigDecimal.intValue())+" "+this.numericalUnit[numericalIndex]+",");
@@ -114,18 +117,23 @@ public class toEnglish {
     }
 
     private String getDecimal(){
-        //首先得到小数的精度
-        //使用int还是会出现越界的问题
-        long scale = this.bigDecimal2.scale();
-        long pow = (long) Math.pow(10,scale);
-        BigDecimal bg = new BigDecimal(pow);
-        BigDecimal fn;
-        //fn = this.bigDecimal2.multiply()
-        fn = this.bigDecimal2.multiply(bg).remainder(bg);
-        //long fnum = this.bigDecimal2.multiply(bg).longValue() % pow;
-        return fn.longValue() + "/" + pow;
-    }
+        StringTokenizer s = new StringTokenizer(this.number,".");
+        s.nextToken();
+        if(!s.hasMoreTokens()){
+            return "";
+        }
+        String decimal = s.nextToken(); //得到小数部分了
 
+        int numberOfZero = decimal.length();//如果长度是1，也加0！！
+        String denominator = "1";
+        for(int i = 0;i<numberOfZero;i++){
+            denominator = denominator + "0";
+        }
+
+        return "and "+decimal + "/" +denominator;
+
+
+    }
 
 }
 
