@@ -18,26 +18,26 @@ public class Strategy2 {
             if(isAlive(g) && shoot(g) && time!=0){
                 //d活着就攻击d，否则攻击m
                 if(isAlive((d))){
-                    g.shootAtTarget(d);
+                    g.shootTarget(d);
                 }
                 else{
-                    g.shootAtTarget(m);
+                    g.shootTarget(m);
                 }
             }
             if(isAlive(m) && shoot(m)){
                 if(isAlive((d))){
-                    m.shootAtTarget(d);
+                    m.shootTarget(d);
                 }
                 else{
-                    m.shootAtTarget(g);
+                    m.shootTarget(g);
                 }
             }
             if(isAlive(d) && shoot(d)){
                 if(isAlive(m)){
-                    d.shootAtTarget(m);
+                    d.shootTarget(m);
                 }
                 else{
-                    d.shootAtTarget(g);
+                    d.shootTarget(g);
                 }
             }
             this.time++;
@@ -106,7 +106,6 @@ public class Strategy2 {
         if(isAlive(d)){
             d.setNumberOfWin(d.getNumberOfWin()+1);
         }
-
     }
     private void init(){
         this.time = 0;

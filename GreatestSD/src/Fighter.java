@@ -4,7 +4,7 @@ public abstract class Fighter {
     private boolean isAlive;
     private int numberOfWin = 0;
 
-    public abstract void shootAtTarget(Fighter target);
+    public abstract void shootTarget(Fighter target);
 
     public String getName() {
         return name;

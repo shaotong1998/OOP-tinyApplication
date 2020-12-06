@@ -18,7 +18,7 @@ public class StrategyGetDetail {
             if(isAlive(g) && shoot(g)){
                 //d活着就攻击d，否则攻击m
                 if(isAlive((d))){
-                    g.shootAtTarget(d);
+                    g.shootTarget(d);
                     if(getDetail){
                         System.out.println(d.getName()+"倒下了");
                     }
@@ -27,7 +27,7 @@ public class StrategyGetDetail {
                     if(getDetail){
                         System.out.println(m.getName()+"倒下了");
                     }
-                    g.shootAtTarget(m);
+                    g.shootTarget(m);
                 }
             }else{
                 if(isAlive(g)&&getDetail){
@@ -40,13 +40,13 @@ public class StrategyGetDetail {
                     if(getDetail){
                         System.out.println(d.getName()+"倒下了");
                     }
-                    m.shootAtTarget(d);
+                    m.shootTarget(d);
                 }
                 else{
                     if(getDetail){
                         System.out.println(g.getName()+"倒下了");
                     }
-                    m.shootAtTarget(g);
+                    m.shootTarget(g);
                 }
             }else{
                 if(isAlive(m)&&getDetail){
@@ -59,13 +59,13 @@ public class StrategyGetDetail {
                     if(getDetail){
                         System.out.println(m.getName()+"倒下了");
                     }
-                    d.shootAtTarget(m);
+                    d.shootTarget(m);
                 }
                 else{
                     if(getDetail){
                         System.out.println(g.getName()+"倒下了");
                     }
-                    d.shootAtTarget(g);
+                    d.shootTarget(g);
                 }
             }
 

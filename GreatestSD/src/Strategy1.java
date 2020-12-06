@@ -15,26 +15,26 @@ public class Strategy1 {
             if(isAlive(g) && shoot(g)){
                 //d活着就攻击d，否则攻击m
                 if(isAlive((d))){
-                    g.shootAtTarget(d);
+                    g.shootTarget(d);
                 }
                 else{
-                    g.shootAtTarget(m);
+                    g.shootTarget(m);
                 }
             }
             if(isAlive(m) && shoot(m)){
                 if(isAlive((d))){
-                    m.shootAtTarget(d);
+                    m.shootTarget(d);
                 }
                 else{
-                    m.shootAtTarget(g);
+                    m.shootTarget(g);
                 }
             }
             if(isAlive(d) && shoot(d)){
                 if(isAlive(m)){
-                    d.shootAtTarget(m);
+                    d.shootTarget(m);
                 }
                 else{
-                    d.shootAtTarget(g);
+                    d.shootTarget(g);
                 }
             }
 
@@ -55,12 +55,7 @@ public class Strategy1 {
     private boolean isAlive(Fighter target){
         return target.isAlive();
     }
-    private Fighter target(Fighter self){
-        //找到除了自己外，命中最高，且活着的人
-        //该部分没有实现
-        String selfName = self.getName();
-        return m;
-    }
+
     private boolean shoot(Fighter fighter){
         double accurate = fighter.getAccurate();
 //        final long randM = System.currentTimeMillis();
@@ -109,6 +104,4 @@ public class Strategy1 {
         m.setAlive(true);
         d.setAlive(true);
     }
-
-
 }

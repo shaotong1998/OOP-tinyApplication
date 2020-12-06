@@ -9,7 +9,7 @@ public class Gandalf extends Fighter{
     }
 
     @Override
-    public void shootAtTarget(Fighter target) {
+    public void shootTarget(Fighter target) {
         /*模拟击中目标
         * 分析： d->1，m->0,1,g->0,0,1
         * 对m来说：[0,1] ->随机出1和2 ->对0.5来说：随机生成[0,100)的数字x，x<accurate*x 成功

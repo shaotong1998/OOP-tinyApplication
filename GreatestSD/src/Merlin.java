@@ -6,7 +6,7 @@ public class Merlin extends Fighter{
     }
 
     @Override
-    public void shootAtTarget(Fighter target) {
+    public void shootTarget(Fighter target) {
         target.setAlive(false);
     }
 }
