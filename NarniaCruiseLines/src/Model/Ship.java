@@ -9,8 +9,24 @@ public class Ship {
     private int shipNumber;
     private String shipName;
     private double shipWeight;
-    private Calendar dateOfBuilt;
+    private String dateOfBuilt;
     private int passengerCapacity;
+
+    public Ship(){};
+    public Ship(int shipNumber,String shipName,double shipWeight,String dateOfBuilt,int passengerCapacity){
+        this.shipName = shipName;
+        this.shipNumber = shipNumber;
+        this.shipWeight = shipWeight;
+        this.dateOfBuilt =dateOfBuilt;
+        this.passengerCapacity = passengerCapacity;
+    };
+    public String getDateOfBuilt() {
+        return dateOfBuilt;
+    }
+
+    public void setDateOfBuilt(String dateOfBuilt) {
+        this.dateOfBuilt = dateOfBuilt;
+    }
 
     public int getShipNumber() {
         return shipNumber;

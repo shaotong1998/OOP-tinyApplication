@@ -15,7 +15,7 @@ public class Passenger {
     private String passengerName;
     private String passengerHomeAddress;
     private String passengerNationality;
-    private Calendar passengerDateOfBirth;
+    private String passengerDateOfBirth;
     private BigDecimal moneySpentOnCruise;
     private HashMap<Integer,BigDecimal> historySpent;
     private HashMap<Integer,Integer> historyRating;

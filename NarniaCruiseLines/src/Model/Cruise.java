@@ -14,9 +14,9 @@ import java.util.Date;
  */
 public class Cruise {
     private int cruiseSerialNumber;
-    private Calendar sailingDate;
-    private Calendar returnDate;
-    private Ports departurePort;//邮轮的来去是一个地方
+    private String sailingDate;
+    private String returnDate;
+    private String departurePort;//邮轮的来去是一个地方
     //有一种依赖关系
     private Ship ship;
     private ArrayList<Sailors> sailors;
@@ -55,13 +55,35 @@ public class Cruise {
         this.cruiseSerialNumber = cruiseSerialNumber;
     }
 
+    public String getSailingDate() {
+        return sailingDate;
+    }
 
+    public void setSailingDate(String sailingDate) {
+        this.sailingDate = sailingDate;
+    }
 
-    public Ports getDeparturePort() {
+    public String getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public String getDeparturePort() {
         return departurePort;
     }
 
-    public void setDeparturePort(Ports departurePort) {
+    public void setDeparturePort(String departurePort) {
         this.departurePort = departurePort;
+    }
+
+    public ArrayList<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(ArrayList<Passenger> passengers) {
+        this.passengers = passengers;
     }
 }

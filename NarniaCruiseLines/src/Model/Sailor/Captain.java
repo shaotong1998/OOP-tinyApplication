@@ -4,7 +4,7 @@ package Model.Sailor;
  */
 
 public class Captain extends Sailors{
-    Captain(){
+    public Captain(){
         setPosition("Captain");
     }
 }
