@@ -2,11 +2,13 @@ package DAO;
 
 import Control.Util;
 import Model.Ship;
+import jdk.jfr.SettingControl;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
 
 /*
  *2020/12/8创建by@Shaotong
@@ -18,7 +20,7 @@ public class ShipData {
 
     public void readData() throws IOException {
         try{
-            BufferedReader in = new BufferedReader(new FileReader("T:\\coding\\OOP\\NarniaCruiseLines\\src\\DAO\\Data\\Ship.txt"));
+            BufferedReader in = new BufferedReader(new FileReader(Setting.ShipText));
             String str ;
             while ((str = in.readLine())!=null){
                 System.out.println(str);

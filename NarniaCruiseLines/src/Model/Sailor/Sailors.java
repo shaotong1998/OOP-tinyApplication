@@ -3,14 +3,30 @@ package Model.Sailor;
  *2020/12/5创建
  */
 
+import java.math.BigDecimal;
+
 public class Sailors {
     private int identificationNumber;
-    private int name;
+    private String name;
     private String dateOfbirth;
-    private double salary;
+    private BigDecimal salary;
     private String nationality;
     private String position;
     private boolean isSuperviser;
+
+    public Sailors(int identificationNumber, String name, String dateOfbirth, BigDecimal salary, String nationality, String position, boolean isSuperviser) {
+        this.identificationNumber = identificationNumber;
+        this.name = name;
+        this.dateOfbirth = dateOfbirth;
+        this.salary = salary;
+        this.nationality = nationality;
+        this.position = position;
+        this.isSuperviser = isSuperviser;
+    }
+
+    public Sailors() {
+
+    }
 
     public boolean isSuperviser() {
         return isSuperviser;
@@ -28,13 +44,11 @@ public class Sailors {
         this.identificationNumber = identificationNumber;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
-        this.name = name;
-    }
+
 
     public String getDateOfbirth() {
         return dateOfbirth;
@@ -44,13 +58,10 @@ public class Sailors {
         this.dateOfbirth = dateOfbirth;
     }
 
-    public double getSalary() {
-        return salary;
+    public String getSalary() {
+        return salary.toString();
     }
 
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
 
     public String getNationality() {
         return nationality;

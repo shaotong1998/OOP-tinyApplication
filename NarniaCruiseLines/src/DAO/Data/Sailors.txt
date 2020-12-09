@@ -1,1 +1,4 @@
-1 joker 1998 1000 CN
+1 joker 1998 1000 CN Captain false
+2 king 1851 2000.1 US Cook false
+3 lucky 1999 2222 JP Doctor false
+4 bob 1221 1561 UK Engineer false
