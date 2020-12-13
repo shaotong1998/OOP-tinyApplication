@@ -9,6 +9,7 @@ import java.util.HashMap;
  */
 public class Setting {
     private static HashMap<String, BigDecimal> salary = new HashMap<String,BigDecimal>();
+    public static double SailorsRatio = 0.1;//没搜船上有十分之一的船员
     public static String SailorsText = "T:\\coding\\OOP\\NarniaCruiseLines\\src\\DAO\\Data\\Sailors.txt";
     public static String ShipText = "T:\\coding\\OOP\\NarniaCruiseLines\\src\\DAO\\Data\\Ship.txt";
     public static String testText = "T:\\coding\\OOP\\NarniaCruiseLines\\src\\DAO\\Data\\test.txt";

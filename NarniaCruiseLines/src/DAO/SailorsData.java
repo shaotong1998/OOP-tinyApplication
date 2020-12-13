@@ -48,7 +48,7 @@ public class SailorsData {
     /*
      *需要从文件内读取并创建一个对象
      */
-    public  Sailors readSailorByID(int id) throws IOException {
+    public static Sailors readSailorByID(int id) throws IOException {
         try{
             BufferedReader in = new BufferedReader(new FileReader(Setting.SailorsText));
             String str ;

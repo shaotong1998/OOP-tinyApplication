@@ -20,7 +20,7 @@ public class Cruise {
     //有一种依赖关系
     private Ship ship;
     private ArrayList<Sailors> sailors;
-    private ArrayList<Ports> ports;
+    private ArrayList<String> ports;
     private ArrayList<Passenger> passengers;
 
     public Ship getShip() {
@@ -39,11 +39,11 @@ public class Cruise {
         this.sailors = sailors;
     }
 
-    public ArrayList<Ports> getPorts() {
+    public ArrayList<String> getPorts() {
         return ports;
     }
 
-    public void setPorts(ArrayList<Ports> ports) {
+    public void setPorts(ArrayList<String> ports) {
         this.ports = ports;
     }
 
