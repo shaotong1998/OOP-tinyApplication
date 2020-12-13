@@ -14,11 +14,11 @@ public class Sailors {
     private String position;
     private boolean isSuperviser;
 
-    public Sailors(int identificationNumber, String name, String dateOfbirth, BigDecimal salary, String nationality, String position, boolean isSuperviser) {
+    public Sailors(int identificationNumber, String name, String dateOfbirth, String salary, String nationality, String position, boolean isSuperviser) {
         this.identificationNumber = identificationNumber;
         this.name = name;
         this.dateOfbirth = dateOfbirth;
-        this.salary = salary;
+        this.salary = new BigDecimal(salary);
         this.nationality = nationality;
         this.position = position;
         this.isSuperviser = isSuperviser;

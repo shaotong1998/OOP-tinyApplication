@@ -69,7 +69,7 @@ public class SailorsData {
                     String nationality = st.nextToken();
                     String position = st.nextToken();
                     boolean isSuperviser= Boolean.parseBoolean(st.nextToken());
-                    Sailors sailors = new Sailors(identificationNumber,name,dateOfbirth,salary,nationality,position,isSuperviser);
+                    Sailors sailors = new Sailors(identificationNumber,name,dateOfbirth,salary.toString(),nationality,position,isSuperviser);
                     in.close();
                     return sailors;
                 }
@@ -83,10 +83,11 @@ public class SailorsData {
     /*
      * 使用FileWriter写文件
      */
-    public static void writeSailors(Sailors sailors){
+    public void writeSailors(Sailors sailors){
         String t = " ";
         String str = sailors.getIdentificationNumber() +t+ sailors.getName()+t+sailors.getDateOfbirth()+t+sailors.getSalary();
         str = str +t+ sailors.getNationality()+t+sailors.getPosition()+t+sailors.isSuperviser()+"\n";
+        //System.out.println(str);
         FileWriter fileWriter;
         try{
             fileWriter = new FileWriter(Setting.SailorsText,true);
